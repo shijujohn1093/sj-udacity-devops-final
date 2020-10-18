@@ -1,0 +1,26 @@
+---
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: capstoneudacity-eksctl
+  region: us-east-1
+  version: "1.17"
+
+availabilityZones: ["us-east-1a", "us-east-1b", "us-east-1c"]
+
+managedNodeGroups:
+- name: nodegroup
+  desiredCapacity: 3
+  instanceType: t2.micro
+  ssh:
+    allow: true
+    publicKeyName: capstoneudacity
+
+# To enable all of the control plane logs, uncomment below:
+# cloudWatch:
+#  clusterLogging:
+#    enableTypes: ["*"]
+
+secretsEncryption:
+  keyARN: arn:aws:kms:us-east-1:287408872399:key/fab165c5-c142-4474-83d7-0db5223e9d66
