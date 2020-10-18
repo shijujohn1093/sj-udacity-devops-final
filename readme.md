@@ -13,11 +13,11 @@ CI/CD pipeline for python flask applicaiton using rolling strategy. Implemented 
 3) k8s-deployment : is for deployment services deployment which will triggered from jenkind
 
 
-##About Project:
+## About Project:
 
 ### Kubenetes Cluster
 
-I created a CI/CD pipeline for a basic website that deploys to a cluster in AWS EKS. Find fina code at  k8s-cluster/create-cluster.sh
+I created a CI/CD pipeline for a basic website that deploys to a cluster in AWS EKS. Find code at k8s-cluster/create-cluster.sh
 
 ### Applicaiton validation, build and deployment through CI/CD pipeline
 
@@ -28,7 +28,6 @@ I created a CI/CD pipeline for a basic website that deploys to a cluster in AWS 
 * Publish docker image to docker hub
 * Deploy application through kubectl
 * Deploy LoadBalancer service through kubectl
-* 
 
 ## Project Requirement
 
