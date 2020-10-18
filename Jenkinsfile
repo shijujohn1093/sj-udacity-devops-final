@@ -63,43 +63,14 @@ pipeline {
             }
         }
 
-        stage('Apply deployment') {
+      stage('Apply deployment') {
             steps {
-                dir('k8s-deployment') {
-                    withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
-                            sh "kubectl --v=6 apply -f k8s-deployment/deployment.yaml"
-                            sh "kubectl --v=6 apply -f k8s-deployment/service.yaml"
-                        }
-                    }
+                    sh "kubectl --v=6 apply -f k8s-deployment/deployment.yaml"
+                    sh "kubectl --v=6 apply -f k8s-deployment/service.yaml"
             }
         }
 
-        stage('Update deployment') {
-            steps {
-                dir('k8s-deployment') {
-                    withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
-                            sh "kubectl set image deployments/capstone capstone=shijujohn1093/capstone:${BUILD_NUMBER}"
-                        }
-                    }
-            }
-        }
-
-        stage('Wait for pods') {
-            steps {
-                withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
-                    sh '''
-                        ATTEMPTS=0
-                        ROLLOUT_STATUS_CMD="kubectl rollout status deployment/capstone"
-                        until $ROLLOUT_STATUS_CMD || [ $ATTEMPTS -eq 60 ]; do
-                            $ROLLOUT_STATUS_CMD
-                            ATTEMPTS=$((attempts + 1))
-                            sleep 10
-                        done
-                    '''
-                }
-            }
-        }
-
+         
         stage('Post deployment test') {
             steps {
                 withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
