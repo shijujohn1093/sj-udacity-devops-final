@@ -69,16 +69,13 @@ pipeline {
                     sh "kubectl --v=6 apply -f k8s-deployment/service.yaml"
             }
         }
-
          
         stage('Post deployment test') {
             steps {
-                withAWS(credentials: 'aws-credentials', region: 'us-east-1') {
                     sh '''
                         HOST=$(kubectl get service service-capstone | grep 'amazonaws.com' | awk '{print $4}')
                         curl $HOST -f
                     '''
-                }
             }
         }
 
