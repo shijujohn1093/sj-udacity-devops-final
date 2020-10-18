@@ -73,7 +73,7 @@ pipeline {
         stage('Post deployment test') {
             steps {
                     sh '''
-                        HOST=$(kubectl get service service-capstone | grep 'amazonaws.com' | awk '{print $4}')
+                        HOST=$(kubectl get service capstoneudacity | grep 'amazonaws.com' | awk '{print $4}')
                         curl $HOST -f
                     '''
             }
