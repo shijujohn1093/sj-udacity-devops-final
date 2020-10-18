@@ -7,8 +7,7 @@ pipeline {
     
         stage("Print Build Information") {
             steps {
-                sh "echo 'Build Number'+${BUILD_NUMBER}"
-                sh "echo 'GIT Commit'+${GIT_COMMIT}"
+                sh "echo 'Build Number:'${BUILD_NUMBER}  'GIT Commit:'${GIT_COMMIT}"
             }
         }
     
